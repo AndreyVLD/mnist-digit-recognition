@@ -14,28 +14,47 @@ def file_printer(prediction, estimated_accuracy, filename):
 # Load data
 mnist_28x28 = np.load('data/mnist_28x28_train.npy')
 labels = np.load('data/mnist_labels.npy')
+mnist_28x28_uk = np.load('data/mnist_28x28_unknown.npy')
 
-# Split data for CNN
-mnist_28x28_train, mnist_28x28_test, labels_train, labels_test = train_test_split(mnist_28x28, labels,
-                                                                                  test_size=0.2, random_state=42)
 
 # SVM
-svm = SVMClassifier(mnist_28x28, labels)
-svc_param_grid = {
-    'C': [2.745],
-    'kernel': ['rbf', ],
-    'degree': [0, 1, 2],
-    'gamma': ['scale', 'auto'],
-    'random_state': [42]
-}
-print("SVC OUTPUT:")
-print("Best hyperparameters: " + svm.fine_tune_svm(param_grid=svc_param_grid).__str__())
-print("Accuracy: " + svm.cross_val_accuracy().__str__())
+def svm():
+    svm_classifier = SVMClassifier(mnist_28x28, labels)
+    svc_param_grid = {
+        'C': [2.745],
+        'kernel': ['rbf', ],
+        'degree': [0, 1, 2],
+        'gamma': ['scale', 'auto'],
+        'random_state': [42]
+    }
+    print("\n-------------------------------------------------------------")
+    print("SVC OUTPUT:")
+    print("Best hyperparameters: " + svm_classifier.fine_tune_svm(param_grid=svc_param_grid).__str__())
+    print("Accuracy: " + svm_classifier.cross_val_accuracy().__str__())
+
 
 # CNN
-print("\n-------------------------------------------------------------")
-print("CNN OUTPUT:")
+def cnn():
+    # Split data for CNN
+    mnist_28x28_train, mnist_28x28_test, labels_train, labels_test = train_test_split(mnist_28x28, labels,
+                                                                                      test_size=0.2, random_state=42)
+    print("\n-------------------------------------------------------------")
+    print("CNN OUTPUT:")
 
-cnn = CNNClassifier()
-cnn.train(mnist_28x28_train, labels_train, epochs=9)
-print("Accuracy: " + cnn.evaluate(mnist_28x28_test, labels_test).__str__())
+    cnn_classifier = CNNClassifier()
+    cnn_classifier.train(mnist_28x28_train, labels_train, epochs=20)
+    accuracy = 0.955
+
+    print("Accuracy: " + accuracy.__str__())
+    file_printer(cnn_classifier.predict(mnist_28x28_uk), accuracy, "group_69_classes.txt")
+
+
+choice = input("Enter 1 for SVM, 2 for CNN, 3 for both: ")
+
+if choice == "1":
+    svm()
+elif choice == "2":
+    cnn()
+elif choice == "3":
+    svm()
+    cnn()

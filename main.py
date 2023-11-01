@@ -12,19 +12,26 @@ def file_printer(prediction, estimated_accuracy, filename):
 
 
 # Load data
-mnist_28x28 = np.load('data/mnist_28x28_train.npy')
-labels = np.load('data/mnist_labels.npy')
-mnist_28x28_uk = np.load('data/mnist_28x28_unknown.npy')
+# Lab dataset:
+mnist_28x28_lab = np.load('data/mnist_28x28_train.npy')
+labels_lab = np.load('data/mnist_labels.npy')
+mnist_28x28_uk_lab = np.load('data/mnist_28x28_unknown.npy')
+# MNIST official dataset:
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+# Splitting the data for CNN
+x_train_lab, x_test_lab, y_train_lab, y_test_lab = train_test_split(mnist_28x28_lab, labels_lab, est_size=0.2,
+                                                                    random_state=42)
 
 
 # SVM
 def svm():
-    svm_classifier = SVM(mnist_28x28, labels)
+    svm_classifier = SVM(mnist_28x28_lab, labels_lab)
     svc_param_grid = {
-        'C': [100],
-        'kernel': ['rbf', ],
-        'degree': [0, 1, 2],
-        'gamma': [0.01],
+        'C': [2.745],
+        'kernel': ['rbf'],
+        'degree': [0],
+        'gamma': ['scale'],
         'random_state': [42]
     }
     print("\n-------------------------------------------------------------")
@@ -37,11 +44,6 @@ def svm():
 # CNN
 def cnn():
     # Split data for CNN
-    # Our dataset:
-    # x_train, x_test, y_train, y_test = train_test_split(mnist_28x28, labels,
-    #                                                    test_size=0.2, random_state=42)
-    # MNIST full dataset:
-    (x_train, y_train), (x_test, y_test) = mnist.load_data()
     print("\n-------------------------------------------------------------")
     print("CNN OUTPUT:")
 
@@ -51,7 +53,7 @@ def cnn():
     cnn_classifier.plot_history()
 
     print("Accuracy: " + accuracy.__str__())
-    file_printer(cnn_classifier.predict(mnist_28x28_uk), accuracy, "group_69_classes.txt")
+    file_printer(cnn_classifier.predict(mnist_28x28_uk_lab), accuracy, "group_69_classes.txt")
 
 
 choice = input("Enter 1 for SVM, 2 for CNN, 3 for both: ")

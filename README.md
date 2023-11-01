@@ -15,3 +15,12 @@ The primary objective of this project is to build and fine-tune a Support Vector
 - **Cross-Validation**: Cross-validation is used to assess the model's performance and evaluate its ability to generalize to unseen data.
 
 - **Accuracy Evaluation**: The project provides a mechanism to evaluate the model's accuracy on both the training and test datasets. Additionally, there's a cross-validation accuracy assessment.
+
+## Required Packages
+
+These packages are needed to be install to properly run this project:
+
+- **scikit-learn**
+- **numpy**
+- **matplotlib**
+

@@ -1,7 +1,7 @@
 from sklearn.model_selection import train_test_split
 
-from SVM import SVMClassifier
-from CNN import CNNClassifier
+from mnist.SVM import SVMClassifier as SVM
+from mnist.CNN import CNNClassifier as CNN
 import numpy as np
 import pandas as pd
 
@@ -19,7 +19,7 @@ mnist_28x28_uk = np.load('data/mnist_28x28_unknown.npy')
 
 # SVM
 def svm():
-    svm_classifier = SVMClassifier(mnist_28x28, labels)
+    svm_classifier = SVM(mnist_28x28, labels)
     svc_param_grid = {
         'C': [2.745],
         'kernel': ['rbf', ],
@@ -41,7 +41,7 @@ def cnn():
     print("\n-------------------------------------------------------------")
     print("CNN OUTPUT:")
 
-    cnn_classifier = CNNClassifier()
+    cnn_classifier = CNN()
     cnn_classifier.train(mnist_28x28_train, labels_train, epochs=20)
     accuracy = 0.955
 

@@ -34,7 +34,7 @@ class SVMClassifier:
         print("Fine-tuning the SVC with GridSearchCV...")
 
         svc_param_grid = {
-            'C': [2.74, 2.75, 2.76],
+            'C': [2.745, 2.750, 2.755],
             'kernel': ['linear', 'rbf'],
             'degree': [0, 1, 2, 3, 4],
             'gamma': ['scale', 'auto'],

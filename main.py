@@ -41,12 +41,13 @@ def cnn():
     print("\n-------------------------------------------------------------")
     print("CNN OUTPUT:")
 
-    cnn_classifier = CNN()
-    cnn_classifier.train(mnist_28x28_train, labels_train, epochs=20)
-    accuracy = 0.955
+    cnn_classifier = CNN(lr=0.01, batch_size=8)
+    cnn_classifier.train(mnist_28x28_train, labels_train, mnist_28x28_test, labels_test, epochs=30)
+    accuracy = cnn_classifier.evaluate(mnist_28x28_test, labels_test)
+    cnn_classifier.plot_history()
 
     print("Accuracy: " + accuracy.__str__())
-    file_printer(cnn_classifier.predict(mnist_28x28_uk), accuracy, "group_69_classes.txt")
+    file_printer(cnn_classifier.predict(mnist_28x28_uk), accuracy, "GUD97.txt")
 
 
 choice = input("Enter 1 for SVM, 2 for CNN, 3 for both: ")

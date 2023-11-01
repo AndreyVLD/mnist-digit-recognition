@@ -7,10 +7,10 @@ labels = mnist_28x28_labels
 
 svm = SVMClassifier(mnist_28x28_train, labels)
 svc_param_grid = {
-    'C': [2.744, 2.745, 2.746],
-    'kernel': ['rbf'],
-    'degree': [0],
-    'gamma': ['scale'],
+    'C': [0.1, 1, 2.745, 10, 100],
+    'kernel': ['linear', 'rbf', 'poly'],
+    'degree': [0, 1, 2, 3, 4, 5],
+    'gamma': ['scale', 'auto', 0.001, 0.01, 0.1, 1],
     'random_state': [42]
 }
 print(svm.fine_tune_svm(param_grid=svc_param_grid))

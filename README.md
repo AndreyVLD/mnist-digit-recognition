@@ -1,4 +1,4 @@
-# MNIST Digit Recognition with Support Vector Machines
+# MNIST Digit Recognition
 
 This repository contains a Python-based project for digit recognition using on the MNIST dataset. The MNIST dataset is a well-known collection of 28x28 grayscale images of handwritten digits, commonly used for training and evaluating machine learning models.
 

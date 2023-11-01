@@ -38,14 +38,14 @@ def svm():
 def cnn():
     # Split data for CNN
     # Our dataset:
-    x_train, x_test, y_train, y_test = train_test_split(mnist_28x28, labels,
-                                                        test_size=0.2, random_state=42)
+    # x_train, x_test, y_train, y_test = train_test_split(mnist_28x28, labels,
+    #                                                    test_size=0.2, random_state=42)
     # MNIST full dataset:
-    # (x_train, y_train), (x_test, y_test) = mnist.load_data()
+    (x_train, y_train), (x_test, y_test) = mnist.load_data()
     print("\n-------------------------------------------------------------")
     print("CNN OUTPUT:")
 
-    cnn_classifier = CNN(batch_size=8)  # batch_size=500 for the whole MNIST dataset
+    cnn_classifier = CNN(batch_size=500)  # batch_size=500 for the whole MNIST dataset
     cnn_classifier.train(x_train, y_train, x_test, y_test, epochs=30)
     accuracy = cnn_classifier.evaluate(x_test, y_test)
     cnn_classifier.plot_history()

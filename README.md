@@ -34,4 +34,5 @@ These packages are needed to be installed to properly run this project:
 - **numpy**
 - **matplotlib**
 - **tensorflow**
+- **pandas** -> optional for file printing as CSV
 

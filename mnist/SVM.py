@@ -61,6 +61,8 @@ class SVMClassifier:
             if x is None or y is None:
                 x = self.total_observations
                 y = self.labels
+            else:
+                x = reshape_and_scale(x)
 
             cross_val_scores = cross_val_score(self.svc, x, y, cv=num_folds, scoring='accuracy')
             return cross_val_scores.mean()
@@ -69,6 +71,7 @@ class SVMClassifier:
 
     def confusion_matrix(self, x_test, y_test):
         if self.svc is not None:
+            x_test = reshape_and_scale(x_test)
             y_pred = self.svc.predict(x_test)
             return confusion_matrix(y_test, y_pred)
         else:
@@ -79,7 +82,8 @@ class SVMClassifier:
             if x_test is None or y_test is None:
                 x_test = self.total_observations
                 y_test = self.labels
-
+            else:
+                x_test = reshape_and_scale(x_test)
             y_pred = self.svc.predict(x_test)
             conf_matrix = confusion_matrix(y_test, y_pred)
             plt.imshow(conf_matrix, interpolation='nearest', cmap=plt.cm.Blues)
@@ -106,6 +110,8 @@ class SVMClassifier:
             if x_test is None or y_test is None:
                 x_test = self.X_test
                 y_test = self.y_test
+            else:
+                x_test = reshape_and_scale(x_test)
 
             y_pred = self.svc.predict(x_test)
             return accuracy_score(y_test, y_pred)
@@ -114,6 +120,7 @@ class SVMClassifier:
 
     def predict(self, x_test):
         if self.svc is not None:
+            x_test = reshape_and_scale(x_test)
             return self.svc.predict(x_test)
         else:
             raise ValueError("SVM model not trained. Run fine_tune_svm() first.")

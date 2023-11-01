@@ -35,4 +35,6 @@ These packages are needed to be installed to properly run this project:
 - **matplotlib**
 - **tensorflow**
 - **pandas** -> optional for file printing as CSV
+- **keras**
+- **The Official MNIST Dataset**
 

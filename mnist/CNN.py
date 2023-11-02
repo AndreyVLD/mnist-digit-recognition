@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 from keras.utils import to_categorical
 
 
+# Building the CNN model
 def build_model():
     model = Sequential()
     model.add(Conv2D(32, kernel_size=5, activation='relu', input_shape=(28, 28, 1)))
@@ -30,6 +31,7 @@ class CNNClassifier:
         self.model = build_model()
         self.history = None
 
+    # Training the model with the given dataset input and saving its history
     def train(self, X_train, y_train, X_test, y_test, epochs=5):
         X_train = X_train / 255.0
         X_test = X_test / 255.0
@@ -42,17 +44,20 @@ class CNNClassifier:
         self.history = self.model.fit(X_train, Y_train, batch_size=self.batch_size, epochs=epochs, verbose=1,
                                       validation_data=(X_test, Y_test), callbacks=[annealer])
 
+    # Evaluating the model with the given dataset input and returning the accuracy
     def evaluate(self, X_test, y_test):
         X_test = X_test.reshape(-1, 28, 28, 1)
         y_test = keras.utils.to_categorical(y_test, num_classes=10)
         test_loss, test_accuracy = self.model.evaluate(X_test, y_test)
         return test_accuracy
 
+    # Predicting the classes of the given dataset input and returning the labels
     def predict(self, new_data):
         predictions = self.model.predict(new_data)
         predicted_classes = np.argmax(predictions, axis=1)
         return predicted_classes
 
+    # Plotting the accuracy and validation accuracy of the model
     def plot_history(self):
         plt.plot(self.history.history['accuracy'], label='training_accuracy')
         plt.plot(self.history.history['val_accuracy'], label='validation_accuracy')

@@ -4,7 +4,7 @@ This repository contains a Python-based project for digit recognition using on t
 
 # Models 
 
-## - Support Vector Machines (SVM)
+## - Support Vector Machines (SVM) - Accuracy 95.5%
 
 - We started by implementing a Support Vector Machine (SVM), a well-established machine learning algorithm, known for its effectiveness in classification tasks. The SVM model was fine-tuned and optimized using grid search and cross-validation techniques.
 - **Data Preprocessing**: Data preprocessing is essential to prepare the raw image data for training. This includes reshaping the images into 1D arrays and scaling the pixel values to a standardized range.
@@ -18,7 +18,7 @@ This repository contains a Python-based project for digit recognition using on t
 - **Accuracy Evaluation**: The project provides a mechanism to evaluate the model's accuracy on both the training and test datasets. Additionally, there's a cross-validation accuracy assessment.
 
   
-## - Convolutional Neural Network (CNN)
+## - Convolutional Neural Network (CNN) - Accuracy 99.5%
 
 - In addition to the SVM, we introduced a Convolutional Neural Network (CNN) for digit recognition. CNNs are deep learning models tailored for image classification tasks. Our CNN architecture includes convolutional layers, max-pooling layers, and fully connected layers, allowing us to learn complex features directly from pixel data. The model was trained on the MNIST dataset, leveraging spatial relationships within the images to achieve high accuracy in recognizing handwritten digits.
 
